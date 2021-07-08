@@ -1,13 +1,15 @@
 ## usersテーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| kana_name          | string | null: false |
-| birthday           | string | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| surname            | string | null: false               |
+| first_name         | string | null: false               |
+| kana_surname       | string | null: false               |
+| kana_first_name    | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 - has_many :items
@@ -16,17 +18,17 @@
 
 ## itemsテーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| name          | string     | null: false |
-| information   | text       | null: false |
-| category      | string     | null: false |
-| status        | string     | null: false |
-| shipping      | string     | null: false |
-| delivery_area | string     | null: false |
-| delivery_days | string     | null: false |
-| price         | integer    | null: false |
-| user          | references |             |
+| Column           | Type       | Options     |
+| ---------------- | ---------- | ----------- |
+| name             | string     | null: false |
+| information      | text       | null: false |
+| category_id      | integer    | null: false |
+| status_id        | integer    | null: false |
+| shipping_id      | integer    | null: false |
+| area_id          | integer    | null: false |
+| days_id          | integer    | null: false |
+| price            | integer    | null: false |
+| user             | references |             |
 
 ### Association
 - belongs_to :user
@@ -36,17 +38,23 @@
 
 | Column          | Type       | Options     |
 | --------------- | ---------- | ----------- |
-| credit_number   | text       | null: false |
 | expiration      | text       | null: false |
-| security_number | integer    | null: false |
+| security_number | string     | null: false |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+
+## addressテーブル
+
+| Column          | Type       | Options     |
+| --------------- | ---------- | ----------- |
 | postal_code     | text       | null: false |
 | prefecture      | text       | null: false |
 | municipality    | text       | null: false |
 | address         | text       | null: false |
 | building_name   | text       |             |
 | phone_number    | integer    | null: false |
-| user            | references |             |
-| prototype       | references |             |
 
 ### Association
 - belongs_to :user
