@@ -1,24 +1,53 @@
-# README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column       | Type   | Options     |
+| ------------ | ------ | ----------- |
+| nickname     | string | null: false |
+| email        | string | null: false |
+| password     | string | null: false |
+| name         | string | null: false |
+| kana_name    | string | null: false |
+| birthday     | string | null: false |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :buys
+- has_many :buys, through: :items
 
-* Ruby version
+## itemsテーブル
 
-* System dependencies
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| name          | string     | null: false |
+| information   | text       | null: false |
+| category      | string     | null: false |
+| status        | string     | null: false |
+| shipping      | string     | null: false |
+| delivery_area | string     | null: false |
+| delivery_days | string     | null: false |
+| price         | integer    | null: false |
+| user          | references |             |
 
-* Configuration
+### Association
+- belongs_to :user
+- has_one :buys
 
-* Database creation
+## buysテーブル
 
-* Database initialization
+| Column          | Type       | Options     |
+| --------------- | ---------- | ----------- |
+| credit_number   | text       | null: false |
+| expiration      | text       | null: false |
+| security_number | integer    | null: false |
+| postal_code     | text       | null: false |
+| prefecture      | text       | null: false |
+| municipality    | text       | null: false |
+| address         | text       | null: false |
+| building_name   | text       |             |
+| phone_number    | integer    | null: false |
+| user            | references |             |
+| prototype       | references |             |
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :user
+- belongs_to :item
