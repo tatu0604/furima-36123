@@ -17,7 +17,7 @@ class Item < ApplicationRecord
      validates :area_id
      validates :days_id
     end
-    validates :price
+    validates :price, inclusion: { in: 300..9999999 }
     validates :image
   end
 
