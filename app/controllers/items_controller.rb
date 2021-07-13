@@ -1,13 +1,11 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
+
   def index
   end
 
   def new
-    if user_signed_in?
       @item = Item.new
-    else
-      redirect_to user_session_path
-    end
   end
 
   def create
@@ -24,4 +22,5 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :image, :information, :category_id, :status_id, :shipping_id, :area_id, :days_id, :price).merge(user_id: current_user.id)
   end
+
 end
