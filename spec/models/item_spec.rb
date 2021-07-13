@@ -57,12 +57,12 @@ RSpec.describe Item, type: :model do
         @item.price = '200'
         @item.price = '99,999,999'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price is not included in the list"
+        expect(@item.errors.full_messages).to include 'Price is not included in the list'
       end
       it 'priceは半角数値以外では登録できないこと' do
         @item.price = '１２a'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price is not included in the list"
+        expect(@item.errors.full_messages).to include 'Price is not included in the list'
       end
       it 'iamgeが空だと保存できないこと' do
         @item.image = nil
