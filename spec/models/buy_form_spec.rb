@@ -23,17 +23,17 @@ RSpec.describe BuyForm, type: :model do
       it '郵便番号は、「3桁ハイフン4桁」以外は保存できないこと' do
         @buy_form.postal_code = '1234567'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Postal code is invalid"
+        expect(@buy_form.errors.full_messages).to include 'Postal code is invalid'
       end
       it '郵便番号は、半角文字列以外は保存できないこと' do
         @buy_form.postal_code = '１２３４５６７'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Postal code is invalid"
+        expect(@buy_form.errors.full_messages).to include 'Postal code is invalid'
       end
       it '都道府県が空だと保存できないこと' do
         @buy_form.area_id = 1
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Area must be other than 1"
+        expect(@buy_form.errors.full_messages).to include 'Area must be other than 1'
       end
       it '市区町村が空だと保存できないこと' do
         @buy_form.municipality = ''
@@ -51,19 +51,19 @@ RSpec.describe BuyForm, type: :model do
         expect(@buy_form.errors.full_messages).to include "Phone number can't be blank"
       end
       it '電話番号は、10桁以下は保存できないこと' do
-        @buy_form.phone_number = 123456789
+        @buy_form.phone_number = 123_456_789
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Phone number is invalid"
+        expect(@buy_form.errors.full_messages).to include 'Phone number is invalid'
       end
       it '電話番号は、11桁以上は保存できないこと' do
-        @buy_form.phone_number = 123456789012
+        @buy_form.phone_number = 123_456_789_012
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Phone number is invalid"
+        expect(@buy_form.errors.full_messages).to include 'Phone number is invalid'
       end
       it '電話番号は、半角数値以外は保存できないこと' do
         @buy_form.phone_number = '１２３４５６７８９０'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include "Phone number is invalid"
+        expect(@buy_form.errors.full_messages).to include 'Phone number is invalid'
       end
       it 'userが紐付いていないと保存できないこと' do
         @buy_form.user_id = nil
@@ -75,7 +75,7 @@ RSpec.describe BuyForm, type: :model do
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include "Item can't be blank"
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @buy_form.token = nil
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include("Token can't be blank")
