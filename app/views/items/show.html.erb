@@ -15,7 +15,7 @@
       </div>
       <% end %>
     </div>
-    
+
     <div class="item-price-box">
       <span class="item-price">
         ¥ <%= @item.price %>
@@ -25,8 +25,7 @@
       </span>
     </div>
 
-     <% if user_signed_in? %>
-       <% if @item.buy.blank? %>
+      <% if user_signed_in? && @item.buy.blank? %>
         <% if  current_user.id == @item.user_id %>
           <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
           <p class="or-text">or</p>
@@ -34,8 +33,7 @@
         <% else %>
           <%= link_to "購入画面に進む", item_buys_path(@item.id), class:"item-red-btn"%>
         <% end %>
-        <% end %>
-     <% end %>
+      <% end %>
 
     <div class="item-explain-box">
       <span><%= @item.information %></span>

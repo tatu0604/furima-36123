@@ -1,9 +1,9 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_find, only: [:index, :create]
-  before_action :move_to_root, only: [:index, :create]
+  before_action :move_to_root
+
   def index
-    redirect_to root_path if @item.buy.present?
     @buy_form = BuyForm.new
   end
 
@@ -40,6 +40,6 @@ class BuysController < ApplicationController
   end
 
   def move_to_root
-    redirect_to root_path if @item.user.id == current_user.id
+    redirect_to root_path if @item.buy.present?
   end
 end
